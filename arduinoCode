@@ -1,0 +1,24 @@
+#include <Servo.h>
+#include <SoftwareSerial.h>
+Servo myservo;  // create servo object to control a serv
+int TxD = 0;
+int RxD = 1;
+int servoposition;
+SoftwareSerial bluetooth(TxD, RxD);
+
+void setup() 
+{
+  bluetooth.begin(9600);         //Sets the data rate in bits per second (baud) for serial data transmission
+  myservo.attach(8);  // attaches the servo on pin 9 to the servo object
+}
+void loop()
+{
+  if(bluetooth.available() > 0)  
+  { 
+    String value = bluetooth.readString();
+    servoposition = value.toInt();
+    bluetooth.print(servoposition);        //Print Value of Incoming_value in Serial monitor
+    bluetooth.print("\n");        //New line 
+    myservo.write(servoposition); 
+  }                            
+}                 
