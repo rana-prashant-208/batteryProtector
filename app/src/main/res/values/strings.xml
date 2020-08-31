@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BatteryProtector</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_led_control">list</string>
+    <string name="save_battery_percentage">Save Battery Percentage</string>
+</resources>
