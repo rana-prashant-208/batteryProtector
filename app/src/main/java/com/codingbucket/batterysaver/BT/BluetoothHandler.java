@@ -11,6 +11,7 @@ import com.codingbucket.batterysaver.Configuration;
 import com.codingbucket.batterysaver.Utils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
 public class BluetoothHandler {
@@ -18,8 +19,8 @@ public class BluetoothHandler {
     BluetoothAdapter myBluetooth = null;
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     String address=null;
-    BluetoothSocket btSocket = null;
-    private boolean isBtConnected = false;
+    private static BluetoothSocket btSocket = null;
+    private static boolean isBtConnected = false;
     private static final int JOB_ID = 0;
     private Context context;
 
@@ -144,8 +145,9 @@ public class BluetoothHandler {
             System.out.println("connectAndWait called");
             if (btSocket == null || !isBtConnected)
             {
+                System.out.println(btSocket+" "+isBtConnected+" "+address);
                 try{
-                    btSocket.close();
+                   // btSocket.close();
                 }catch (Exception e){
 
                 }
@@ -154,17 +156,19 @@ public class BluetoothHandler {
                 btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);//create a RFCOMM (SPP) connection
                 BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                 btSocket.connect();//start connection
+
                 System.out.println("connectAndWait done");
 
                 setConnectionGoingOn(false);
             }
         }
-        catch (IOException e)
+        catch (Throwable e)
         {
             System.out.println("connectAndWait Exception "+e.getMessage());
             e.printStackTrace();
-            connectAndWait();
-//            setConnectionGoingOn(false);
+
+//            connectAndWait();
+            setConnectionGoingOn(false);
         }
         while (isConnectionGoingOn()){
             try {
@@ -194,6 +198,7 @@ public class BluetoothHandler {
     }
 
     public void connect() {
+        System.out.println("Connnecting "+address);
         new ConnectBT().execute(); //Call the class to connect
     }
 }

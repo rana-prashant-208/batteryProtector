@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingbucket.batterysaver.deviceHandler.DeviceHandlerImpl;
-import com.codingbucket.batterysaver.schedule.BackgroundJobScheduleImpl;
 
 import java.util.ArrayList;
 import java.util.Set;

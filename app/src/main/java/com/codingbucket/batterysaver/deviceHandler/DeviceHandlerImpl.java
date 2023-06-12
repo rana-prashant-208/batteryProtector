@@ -105,7 +105,7 @@ public class DeviceHandlerImpl extends AppCompatActivity {
         btnDis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//               v Disconnect(); //close connection
+                bluetoothHandler.disconnect();
             }
         });
         btnOn.setOnClickListener(new View.OnClickListener() {
