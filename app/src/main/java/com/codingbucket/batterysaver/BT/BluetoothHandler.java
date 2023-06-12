@@ -145,12 +145,7 @@ public class BluetoothHandler {
             System.out.println("connectAndWait called");
             if (btSocket == null || !isBtConnected)
             {
-                System.out.println(btSocket+" "+isBtConnected+" "+address);
-                try{
-                   // btSocket.close();
-                }catch (Exception e){
-
-                }
+                System.out.println("### "+btSocket+" "+isBtConnected+" "+address);
                 myBluetooth = BluetoothAdapter.getDefaultAdapter();//get the mobile bluetooth device
                 BluetoothDevice dispositivo = myBluetooth.getRemoteDevice(address);//connects to the device's address and checks if it's available
                 btSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);//create a RFCOMM (SPP) connection
@@ -162,12 +157,10 @@ public class BluetoothHandler {
                 setConnectionGoingOn(false);
             }
         }
-        catch (Throwable e)
+        catch (Exception e)
         {
             System.out.println("connectAndWait Exception "+e.getMessage());
             e.printStackTrace();
-
-//            connectAndWait();
             setConnectionGoingOn(false);
         }
         while (isConnectionGoingOn()){
